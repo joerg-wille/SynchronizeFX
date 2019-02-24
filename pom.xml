@@ -80,6 +80,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<nettyVersion>4.0.21.Final</nettyVersion>
+
 		<!-- for maven site -->
 		<currentVersion>${project.version}</currentVersion>
 	</properties>
@@ -136,21 +139,65 @@
 				<version>2.24.0</version>
 			</dependency>
 			<dependency>
-				<groupId>io.netty</groupId>
-				<artifactId>netty-all</artifactId>
-				<version>4.0.21.Final</version>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-common</artifactId>
+			        <version>${nettyVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>3.2.2</version>
 			</dependency>
-            <dependency>
-                <groupId>javax.websocket</groupId>
-                <artifactId>javax.websocket-api</artifactId>
-                <version>1.1</version>
-                <scope>provided</scope>
-            </dependency>
+                        <dependency>
+                                <groupId>javax.websocket</groupId>
+                                <artifactId>javax.websocket-api</artifactId>
+                                <version>1.1</version>
+                                <scope>provided</scope>
+                        </dependency>
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>javafx</artifactId>
+				<version>8</version>
+				<scope>system</scope>
+				<systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${nettyVersion}</version>
+			</dependency>
+			<!-- Using netty-subprojects
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-handler</artifactId>
+			        <version>${nettyVersion}</version>
+			</dependency>
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-codec-http</artifactId>
+			        <version>${nettyVersion}</version>
+			</dependency>
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-codec</artifactId>
+			        <version>${nettyVersion}</version>
+			</dependency>
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-buffer</artifactId>
+		                <version>${nettyVersion}</version>
+			</dependency>
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-transport</artifactId>
+			        <version>${nettyVersion}</version>
+			</dependency>
+			<dependency>
+			        <groupId>io.netty</groupId>
+			        <artifactId>netty-common</artifactId>
+			        <version>${nettyVersion}</version>
+			</dependency>
+			-->
 			<dependency>
 				<!-- For websockets -->
 				<groupId>org.apache.tomcat</groupId>
@@ -413,35 +460,20 @@
 			</build>
 		</profile>
 		<profile>
+			<!-- For the Oracle JDK the path to the JavaFX jar is only needed for Java 1.7 as it is in the default classpath starting 
+				with Java 1.8. -->
 			<id>jfx-jar-in-java7</id>
 			<activation>
 				<jdk>1.7</jdk>
 			</activation>
 			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>com.oracle</groupId>
-						<artifactId>javafx</artifactId>
-						<version>2.2</version>
-						<scope>system</scope>
-						<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
-		</profile>
-		<profile>
-			<id>jfx-jar-in-java8</id>
-			<activation>
-				<jdk>1.8</jdk>
-			</activation>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>com.oracle</groupId>
-						<artifactId>javafx</artifactId>
-						<version>2.2</version>
-						<scope>system</scope>
-						<systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+			        <dependencies>
+				        <dependency>
+					        <groupId>com.oracle</groupId>
+					        <artifactId>javafx</artifactId>
+					        <version>2.2</version>
+					        <scope>system</scope>
+					        <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
